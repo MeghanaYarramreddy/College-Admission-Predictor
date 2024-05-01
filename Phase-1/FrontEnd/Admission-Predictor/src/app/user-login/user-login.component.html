@@ -1,0 +1,70 @@
+<body>
+    <!-- <app-homenav></app-homenav> -->
+      <app-home-nav></app-home-nav>
+
+
+    <br><br><br>
+    <table align="center" style="color: bisque">
+        <div class="form-group">
+
+            <h2> <i class="fas fa-unlock-alt"></i> &nbsp;User Login!</h2>
+            <br>
+            <form #userForm='ngForm' (ngSubmit)="onSubmit(userForm.value)">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <i class="far fa-user fa-2x"></i> &nbsp; <b style="font-size: large;"> Phone Number</b>
+                            <input required type="text" size="35" #phoneRef='ngModel' pattern="[1-9][0-9]{9}"
+                                name="phone" placeholder="Enter Phone number " class="form-control" ngModel>
+                            <div *ngIf='phoneRef.errors && (phoneRef.touched || phoneRef.dirty)'
+                                class="alert alert-danger">
+                                <div [hidden]='!phoneRef.errors.required'>
+                                    please enter your phone number
+                                </div>
+                                <div [hidden]='!phoneRef.errors.pattern'>
+                                    phone no should be of 10 digits
+                                </div>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <i class="fas fa-user-secret fa-2x"></i> &nbsp; <b style="font-size: large;"> Password</b>
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <input type="password" #passwordRef='ngModel' name="password" placeholder="Enter Password"
+                                class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" ngModel>
+                            <!-- [(ngModel)]="userForm.password" -->
+                            <div *ngIf="passwordRef.invalid && (userForm.submitted || passwordRef.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="passwordRef.errors.required"> Password is required. </div>
+                                <div *ngIf="passwordRef.errors.pattern"> Case sensitive & Min 8 char</div>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+                <button class="btn btn-primary btn-sm" type="submit" [disabled]='userForm.invalid'
+                    style="color: black" href="#">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a routerLink="/forgotPassword" style="color:bisque" data-toggle="tooltip"
+                    title="To Reset Password">Forgot
+                    Password?</a>
+            </form>
+            <br>
+            
+        </div>
+    </table>
+    <table align="center">
+        <a routerLink="/register" style="color:bisque" data-toggle="tooltip" title="For User Registration"> New User?
+            Click
+            Here</a>
+            <div>
+                <p
+                    style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;text-align: center;color: red">
+                    {{message}}</p>
+            </div>
+    </table>
+</body>

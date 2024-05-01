@@ -1,0 +1,50 @@
+<body>
+<app-navbar></app-navbar>
+
+<div ><br><br><br>
+  <!-- <h2 style="margin-left: 33%;">View Feedback</h2> -->
+    <form style="margin-left: 4%;">
+
+      <form  class="navbar-form navbar-center" action="/action_page.php">
+        <div>
+          <input type="text" class="form-control" placeholder=" &#61442; Search" id="search" [(ngModel)]="searchText"
+            name="search">
+
+          <!-- <div class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </div> -->
+        </div>
+      </form>
+      <br>
+      <br>
+      <table [mfData]="feedbackData" #mf="mfDataTable" [mfRowsOnPage]="5">
+      <table  style="width: 70%;font-size: 18px;border-width: 5px;"  border="2"  cellspacing="2px" cellpadding="2px" >
+
+
+        <tr>
+            <th><mfDefaultSorter by="userName"><b>User Name</b></mfDefaultSorter></th>
+            <th><mfDefaultSorter by="phoneNo"><b>Mobile Number</b></mfDefaultSorter></th>
+            <!-- <th><i style="color:#4807fa"><mfDefaultSorter by="userEmail"><b>Email</b></mfDefaultSorter></i></th> -->
+            <th><mfDefaultSorter by="feedback"><b>Feedback</b></mfDefaultSorter></th>
+            <th><mfDefaultSorter by="description"><b>Description</b></mfDefaultSorter></th>
+            </tr>
+
+        <tr id="userBooking" *ngFor="let c of mf.data | filter:searchText ;let i=index">
+          <td>{{c.userName}}</td>
+          <td>{{c.phoneNo}}</td>
+          <!-- <td>{{c.userEmail}}</td> -->
+          <td>{{c.feedback}}</td>
+          <td>{{c.description}}</td>
+          </tr>
+
+      </table>
+      <div style="margin-left: 33%;" >
+      <mfBootstrapPaginator></mfBootstrapPaginator>
+    </div>
+
+    </table>
+    </form> 
+  </div>
+</body>

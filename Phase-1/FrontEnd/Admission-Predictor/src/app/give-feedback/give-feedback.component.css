@@ -1,0 +1,35 @@
+body{
+    
+    color: floralwhite;
+    background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(src\assets\images\feedback.jpg);
+    background-color: rgba(13, 30, 45, 0.6);
+}
+.heading {
+    text-align: right;
+    letter-spacing: 2px;
+    font-size: 50px;
+    border-bottom: 2px double floralwhite;
+}
+.btn-info{
+    width: 50%;
+    letter-spacing: 2px;
+    background: transparent;
+    transition: all 0.5s ease-in-out;
+}
+.btn-info:hover{
+    transform: scale(1.05);
+}
+ul li a {
+    float: left;
+    margin-left: 22px;
+    margin-right: 10px;
+}
+.buttons a:hover
+{ 
+border:2px inset rgb(76, 177, 211);
+background:black;
+transition: all 0.5s ease-in-out;
+}
+.hr{
+    width: 80%;
+}

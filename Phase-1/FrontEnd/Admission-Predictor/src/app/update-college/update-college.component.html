@@ -1,0 +1,191 @@
+<body>
+<app-navbar></app-navbar>
+<table width="100%">
+
+  <div class="m-5 myContent">
+    <div class="container">
+      <form #updateForm="ngForm" (ngSubmit)="submitUpdateForm(updateForm)">
+        <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+            <h4 style="text-align:center"><strong> College Details </strong></h4><br>
+            <h6 style="text-align:right;color:dimgrey;font-size:small">
+              <marquee direction="left" width="100%" style="color:black;">All Fields are Mandatory</marquee>
+            </h6><br>
+            <div class="form-group">
+              <div class="col" style="text-align:left">
+                <label>College Code</label>
+              </div>
+              <div class="col; input-group">
+                <input type="text" name="collegeId" maxlength="5" #collegeId="ngModel"
+                  [(ngModel)]="collegeToUpdate.collegeCode" class="form-control" ngModel readonly required>
+              </div>
+              <div *ngIf="collegeId.errors && (collegeId.dirty || collegeId.touched)"
+                style="text-align:left; padding-top:5px; color:red;">
+                <div *ngIf="collegeId.errors && (collegeId.dirty || collegeId.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!collegeId.errors.required">
+                    <p>&nbsp;College Code is mandatory</p>
+                  </div>
+
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>College Name</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="collegeName" #collegeName="ngModel" pattern="[a-zA-Z\s]{3,}"
+                    [(ngModel)]="collegeToUpdate.collegeName" class="form-control" ngModel required>
+                </div>
+                <div *ngIf="collegeName.errors && (collegeName.dirty || collegeName.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!collegeName.errors.required">
+                    <p>&nbsp;Name is mandatory</p>
+                  </div>
+                  <div [hidden]='!collegeName.errors.pattern'>
+                    <p>College name must have min 3 Charactors & only alphabates</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>Address</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="address" minlength="3" #address="ngModel"
+                    [(ngModel)]="collegeToUpdate.address" class="form-control" ngModel required>
+                </div>
+                <div *ngIf="address.errors && (address.dirty || address.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!address.errors.required">
+                    <p>&nbsp;Address is mandatory</p>
+                  </div>
+                  <div [hidden]='!address.errors.minlength'>
+                    <p>Address must have min 3 Charactors</p>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>City</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="city" #city="ngModel" minlength="3" [(ngModel)]="collegeToUpdate.city"
+                    class="form-control" ngModel required>
+                </div>
+                <div *ngIf="city.errors && (city.dirty || city.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!city.errors.required">
+                    <p>&nbsp;City is mandatory</p>
+                  </div>
+                  <div [hidden]='!city.errors.minlength'>
+                    <p>City must have min 3 Charactors</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>State</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="location" #location="ngModel" minlength="2"
+                    [(ngModel)]="collegeToUpdate.state" class="form-control" ngModel required>
+                </div>
+                <div *ngIf="location.errors && (location.dirty || location.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!location.errors.required">
+                    <p>&nbsp;State is mandatory</p>
+                  </div>
+                  <div [hidden]='!location.errors.minlength'>
+                    <p>State must have min 3 Charactors</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>Contact Number</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="contactNumber" maxlength="10" pattern="(6|7|8|9)\d{9}"
+                    #contactNumber="ngModel" [(ngModel)]="collegeToUpdate.contactNumber" class="form-control" ngModel
+                    required>
+                </div>
+                <div *ngIf="contactNumber.errors && (contactNumber.dirty || contactNumber.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!contactNumber.errors.required">
+                    <p>&nbsp;Contact Number is mandatory</p>
+                  </div>
+                  <div [hidden]="!contactNumber.errors.pattern">
+                    <p>&nbsp;Contact Number must have 10 digits & Numerical</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                Existing branches
+                <div class="table table-striped" *ngFor="let d of collegeToUpdate.branchCutoff | keyvalue,let index=i">
+                  {{d.key}}&nbsp;&nbsp;-&nbsp;&nbsp;{{d.value}}
+                </div>
+              </div>
+              <div class="col" style="text-align:left">
+                <label>Choose Departments</label>
+              </div>
+              <h6 style="text-align:right;color:dimgrey;font-size:small">While updating all department details will be
+                lost. Please update complete departments details</h6>
+              <div class="form-check " *ngFor="let dept of departmentList,let index=i">
+                <input type="checkbox" value="{{dept.name}}" name="dept.name" (change)="departmentChange($event)"
+                  required>
+                {{dept.name}}
+                <div *ngIf="dept.name.errors && (dept.name.dirty || dept.name.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!dept.name.errors.required">
+                    <p>&nbsp;Department is mandatory</p>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col" style="text-align:left">
+                <label>Cutoff Percentage</label>
+              </div>
+              <div class="form-check" *ngFor="let dept of selectedDepartment,let index=i">
+                {{dept}}
+                <input type="number" name="cutoff" pattern="^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$" #cutoff="ngModel" (change)="cutoffChange($event)"
+                  class="form-control" ngModel required>
+                <div *ngIf="cutoff.errors && (cutoff.dirty || cutoff.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!cutoff.errors.required">
+                    <p>&nbsp;Cutoff percent is mandatory</p>
+                  </div>
+                  <div [hidden]='!cutoff.errors.pattern'>
+                    <p>Please enter the cutoff Percentage</p>
+                  </div>
+                </div>
+              </div>
+              <br>
+
+              <div class="form-group" style="text-align:center">
+                <button type="submit" style="font-size: 25px" [disabled]="updateForm.invalid"
+                  class="btn btn-default">Submit</button>
+              </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+          <div *ngIf="showDiv" style="color:red;text-align:center;">
+            <br />
+            {{msg}}
+            {{errorMsg}}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</table>
+</body>

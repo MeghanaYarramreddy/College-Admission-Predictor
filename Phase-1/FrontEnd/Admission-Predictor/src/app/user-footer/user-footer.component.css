@@ -1,0 +1,55 @@
+html, body {
+    height: 100%;
+    background-color:white;
+}
+.heading {
+    text-align: center;
+    font-size: 50px;
+    border-bottom: 2px double floralwhite;
+}
+.page-content{
+    background-color:rgb(73, 71, 71);
+    min-height:70%;
+}
+.icon{
+    font-family: monospace;
+    font-size: 18px;
+}
+ul li a {
+    color: floralwhite;
+    float: left;
+    font-family:monospace;
+    font-size: 25px;
+    margin-left: 22px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+ul li a:hover{
+    color:rgb(57, 177, 218);
+    transition: 0.5s ease-in-out;
+}
+
+         /* footer section */
+.footer {
+   background-color: black;
+    color: white;
+    height: 180px;
+    position: relative;
+}
+.footer .footer-content {
+    padding-top: 20px;
+    border: 1px solid rgb(65, 64, 64);
+    height: 140px;
+}
+.footer .footer-bottom {
+    background:rgb(36, 35, 35);
+    border: 1px solid rgb(65, 64, 64);
+    color: wheat;
+    height: 40px;
+    font-size: medium;
+    letter-spacing: 1px;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    padding-left: 20px;
+}

@@ -1,0 +1,182 @@
+
+<body>
+
+<app-navbar></app-navbar>
+<table width="100%">
+  <div class="m-5 myContent">
+    <div class="container">
+      <form action="action_page.php" #createForm="ngForm" (ngSubmit)="submitCreateForm(createForm)">
+        <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+            <h2 style="text-align:center">Add College</h2><br>
+            <h6 style="text-align:right;color:dimgrey;font-size:small">
+              <marquee direction="left" width="100%" style="color:black;">All Fields are Mandatory</marquee>
+            </h6><br>
+
+            <div class="form-group">
+              <div class="col" style="text-align:left">
+                <label>College Code</label>
+              </div>
+              <div class="col; input-group">
+                <input type="text" name="collegeId" pattern="[a-zA-Z]{5}" maxlength="5" #collegeId="ngModel"
+                  class="form-control" ngModel required>
+              </div>
+              <div *ngIf="collegeId.errors && (collegeId.dirty || collegeId.touched)"
+                style="text-align:left; padding-top:5px; color:red;">
+                <div [hidden]="!collegeId.errors.required">
+                  <p>&nbsp;College Code is mandatory</p>
+                </div>
+                <div [hidden]='!collegeId.errors.pattern'>
+                  <p>College Code must be of 5 Charactors & only alphabates</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>College Name</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="collegeName" pattern="[a-zA-Z\s]{3,}" #collegeName="ngModel"
+                    class="form-control" ngModel required>
+                </div>
+                <div *ngIf="collegeName.errors && (collegeName.dirty || collegeName.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!collegeName.errors.required">
+                    <p>&nbsp;Name is mandatory</p>
+                  </div>
+                  <div [hidden]='!collegeName.errors.pattern'>
+                    <p>College name must have min 3 Charactors & only alphabates</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>Address</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="address" minlength="3" #address="ngModel" class="form-control" ngModel
+                    required>
+                </div>
+                <div *ngIf="address.errors && (address.dirty || address.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!address.errors.required">
+                    <p>&nbsp;Address is mandatory</p>
+                  </div>
+                  <div [hidden]='!address.errors.minlength'>
+                    <p>Address must have min 3 Charactors</p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>City</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="city" minlength="3" #city="ngModel" class="form-control" ngModel required>
+                </div>
+                <div *ngIf="city.errors && (city.dirty || city.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!city.errors.required">
+                    <p>&nbsp;City is mandatory</p>
+                  </div>
+                  <div [hidden]='!city.errors.minlength'>
+                    <p>City must have min 3 Charactors</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>State</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="location" minlength="2" #location="ngModel" class="form-control" ngModel
+                    required>
+                </div>
+                <div *ngIf="location.errors && (location.dirty || location.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!location.errors.required">
+                    <p>&nbsp;State is mandatory</p>
+                  </div>
+                  <div [hidden]='!location.errors.minlength'>
+                    <p>State must have min 2 Charactors</p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <div class="col" style="text-align:left">
+                  <label>Contact Number</label>
+                </div>
+                <div class="col; input-group">
+                  <input type="text" name="contactNumber" maxlength="10" pattern="(6|7|8|9)\d{9}"
+                    #contactNumber="ngModel" class="form-control" ngModel required>
+                </div>
+                <div *ngIf="contactNumber.errors && (contactNumber.dirty || contactNumber.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!contactNumber.errors.required">
+                    <p>&nbsp;Contact Number is mandatory</p>
+                  </div>
+                  <div [hidden]="!contactNumber.errors.pattern">
+                    <p>&nbsp;Contact Number must have 10 digits & Numerical</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col" style="text-align:left">
+                <label>Choose Departments</label>
+              </div>
+              <div class="form-check " *ngFor="let dept of departmentList,let index=i">
+                <input type="checkbox" name="dept" required value="{{dept}}" (change)="departmentChange($event)">
+                {{dept}}
+                <div *ngIf="dept.errors && (dept.dirty || dept.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!dept.errors.required">
+                    <p>&nbsp;Department is mandatory</p>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col" style="text-align:left">
+                <label>Cutoff Percentage</label>
+              </div>
+              <div class="form-check" *ngFor="let dept of selectedDepartment,let index=i">
+                {{dept}}
+                <input type="number" name="cutoff" #cutoff="ngModel" pattern="^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$" (change)="cutoffChange($event)"
+                  class="form-control" ngModel required>
+
+                <div *ngIf="cutoff.errors && (cutoff.dirty || cutoff.touched)"
+                  style="text-align:left; padding-top:5px; color:red;">
+                  <div [hidden]="!cutoff.errors.required">
+                    <p>&nbsp;Cutoff percent is mandatory</p>
+                  </div>
+                  <div [hidden]='!cutoff.errors.pattern'>
+                    <p>Please enter the cutoff Percentage</p>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="form-group" style="text-align:center">
+                <button type="submit" style="font-size: 25px" [disabled]='createForm.invalid'
+                  class="btn btn-info">Add</button>
+              </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+          <div *ngIf="showDiv" style="color:red;text-align:center;">
+            <br />
+            {{msg}}
+            {{errorMsg}}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</table>
+</body>

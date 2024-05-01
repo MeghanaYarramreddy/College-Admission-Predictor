@@ -1,0 +1,57 @@
+
+<body> 
+<app-user-navbar></app-user-navbar>
+
+<div>
+<h1 align="center" > Your Feedback</h1>
+<h3 style="text-align: center;">We would like your feedback to improve our website</h3>
+<br>
+<h5 style="text-align: center;"> What is your opinion on our site??</h5>
+<br>
+<div class="buttons">
+    <ul class="list-unstyled" style="padding-left: 30%;"> 
+        <li><a  (click)="sayFeedback('Great')"><i title="Great" class="far fa-grin-hearts" style='font-size:58px;color:yellow'></i><p id="Great" style='font-size:19px;color:orange'></p></a></li>
+        <li><a  (click)="sayFeedback('Good')"><i title="Good" class="far fa-laugh" style='font-size:58px;color:yellow'></i><p id="Good" style='font-size:19px;color:orange'></p></a></li>
+        <li><a  (click)="sayFeedback('Ok')"><i title="Ok" class="far fa-smile" style='font-size:58px;color:yellow'></i><p id="Okay" style='font-size:19px;color:orange'></p></a></li>
+        <li><a  (click)="sayFeedback('Bad')"><i title="Bad" class="far fa-meh" style='font-size:58px;color:yellow'></i><p id="Bad" style='font-size:19px;color:orange'></p></a></li>
+        <li><a  (click)="sayFeedback('Terrible')"><i title="Terrible" class="far fa-frown" style='font-size:58px;color:yellow'></i><p id="Terrible" style='font-size:19px;color:orange'></p></a></li> 
+        <div><br><br><br><br>
+          
+            <h4 
+                style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;color: rgb(0, 255, 136);margin-left: 25%;">
+              {{message1}}</h4>
+        </div>
+    </ul>
+    
+</div>
+
+<hr>
+
+<div class ="row">
+
+<div class = "col-md-6">
+<form #feedbackForm='ngForm' (ngSubmit)="onSubmit(feedbackForm.value)">
+   
+    <input style="margin-left: 50%;height: 50px;" required type="text" name="feedback" pattern="[A-Za-z\s]{3,}" #feedbackRef='ngModel' placeholder="Please leave your feedback" id="message" class ="form-control" ngModel> <br>
+    <div style="margin-left: 50%;" *ngIf='feedbackRef.errors && (feedbackRef.touched || feedbackRef.dirty)' class="alert alert-danger">
+        <div  [hidden]='!feedbackRef.errors.required'>
+            please give your Feedback
+        </div>
+        <div  [hidden]='!feedbackRef.errors.pattern'>
+            feedback should be only alphabets with more than 3 characters
+        </div>
+    </div>
+   
+    <button  style="margin-left: 70%;" class=" btn btn-info" id="button" type="submit" value="Submit" [disabled]='feedbackForm.invalid'>Submit</button>
+    <br>
+    <br>
+<br>
+</form>
+
+</div>
+
+</div>
+</div>
+<br>
+<app-user-footer></app-user-footer>
+</body>

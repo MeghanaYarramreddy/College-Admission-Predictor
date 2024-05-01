@@ -1,0 +1,147 @@
+<body>
+    <app-user-navbar></app-user-navbar>
+    <h3 style="text-align:center"><strong> Predicted Colleges </strong></h3><br>
+    <h6 style="text-align:center;color:dimgrey;font-size:small">
+        <marquee align="center" direction="left" width="50%" style="color:black;">Predicted Colleges are based on your marks %</marquee>
+      </h6><br>
+       <div style="margin-right: 210px;" align="right"><button type="button" [appExport]="exportSamples" fileName="PredictedColleges" class="btn btn-success">
+        Export
+      </button></div>
+    <div style="margin-left: 5%;" *ngIf=a>
+
+        <form>
+            <label style="font-size: 17px;margin-left: 15%;" for="cars">Choose branch:</label>
+            <select id="branch" name="branch" #branch="ngModel" (change)="selectBranch(selectedBranch)"
+                [(ngModel)]="selectedBranch">
+                <option value="CIVIL">CIVIL</option>
+                <option value="MECH">MECH</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="IT">IT</option>
+            </select>
+            <label style="font-size: 15px;margin-left: 830px;" align="right">
+                <strong> Number of Results : {{samples.length}}</strong>    
+            </label>
+           
+        </form>
+     
+    </div>
+    <div  class="container" id="content" *ngIf=b>
+        <table   [mfData]="samples" #mf="mfDataTable" [mfRowsOnPage]="3" >
+        <table style="width: 95%;margin-left: 20%;" border="2" align="center">
+            <thead style="font-size: 17px">
+                <tr>
+                    <th >
+                            <mfDefaultSorter by="collegeCode"><b>College Code</b></mfDefaultSorter>
+                    </th>
+                    <th >
+                            <mfDefaultSorter by="collegeName"><b>College Name</b></mfDefaultSorter>
+                        </th>
+                    <th>
+                            <mfDefaultSorter by="state"><b>State</b></mfDefaultSorter>
+                        </th>
+                    <th>
+                            <mfDefaultSorter by="city"><b>City</b></mfDefaultSorter>
+                       </th>
+                    <th >
+                            <mfDefaultSorter by="address"><b>Address</b></mfDefaultSorter>
+                        </th>
+                    <th>
+                            <mfDefaultSorter by="contactNumber"><b>Contact Number</b></mfDefaultSorter>
+                       </th>
+                    <th ><b>Branch Cutoff %</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let object of mf.data">
+                    <td>{{object.collegeCode}}</td>
+                    <td>{{object.collegeName}}</td>
+                    <td>{{object.state}}</td>
+                    <td>{{object.city}}</td>
+                    <td>{{object.address}}</td>
+                    <td>{{object.contactNumber}}</td>
+                    <td>
+                        <div *ngFor="let recipient of object.branchCutoff | keyvalue">
+                        <div *ngIf="selectedBranch == recipient.key">
+                            <b>{{recipient.key}} -- {{recipient.value}}</b>
+                        </div>
+                    </div>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+        <div  style="margin-left: 35%;" align="center">
+           
+                
+                    <mfBootstrapPaginator></mfBootstrapPaginator>
+         
+        </div>
+        </table>
+    </div>
+
+<div   *ngIf="samples.length !=0">
+    <div class="container" id="content" *ngIf=c>
+       <br>
+       <table   [mfData]="samples" #mf="mfDataTable" [mfRowsOnPage]="3" >
+        <table id="tab" style="width: 95%;margin-left: 20%;" border="2" align="center">
+            
+            <thead style="font-size: 17px">
+                <tr>
+                    <th>
+                            <mfDefaultSorter by="collegeCode"><b>College Code</b></mfDefaultSorter>
+                        </th>
+                    <th >
+                            <mfDefaultSorter by="collegeName"><b>College Name</b></mfDefaultSorter>
+                  </th>
+                    <th>
+                            <mfDefaultSorter by="state"><b>State</b></mfDefaultSorter>
+                        </th>
+                    <th>
+                            <mfDefaultSorter by="city"><b>City</b></mfDefaultSorter>
+                        </th>
+                    <th>
+                            <mfDefaultSorter by="address"><b>Address</b></mfDefaultSorter>
+                        </th>
+                    <th>
+                            <mfDefaultSorter by="contactNumber"><b>Contact Number</b></mfDefaultSorter>
+                        </th>
+                    <th><b>Branch Cutoff %</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let object of mf.data">
+                    <td>{{object.collegeCode}}</td>
+                    <td>{{object.collegeName}}</td>
+                    <td>{{object.state}}</td>
+                    <td>{{object.city}}</td>
+                    <td>{{object.address}}</td>
+                    <td>{{object.contactNumber}}</td>
+                    <td>
+                        <div *ngFor="let recipient of object.branchCutoff | keyvalue">
+                            {{recipient.key}} -- {{recipient.value}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+           
+        </table>
+       <div style="margin-left: 35%;" align="center" >
+       
+           
+                <mfBootstrapPaginator></mfBootstrapPaginator>
+            
+       
+       </div>
+       </table>
+    </div>
+</div>
+
+    <div style="height: 400px;" align="center" *ngIf="samples.length ==0">
+        <h4 style="color: red;">No predicted Colleges Found for the selected branch</h4>
+    </div>
+
+
+</body>
+<app-user-footer></app-user-footer>

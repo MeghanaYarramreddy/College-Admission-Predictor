@@ -1,0 +1,87 @@
+<body>
+    <app-user-navbar></app-user-navbar>
+
+    <h3 style="text-align:center"><strong> All Colleges </strong></h3><br>
+    <form style="margin-left: 13%">
+        <label for="cars"style="font-size: 17px;">Choose State:</label>
+        <select id="state" name="state" #state="ngModel" (change)="selectedState(selectState)" [(ngModel)]="selectState">
+            <option></option>
+            <option *ngFor="let s of states ">{{s}}</option>
+        </select>
+        &nbsp; &nbsp;  &nbsp; &nbsp;
+        <label for="cars"style="font-size: 17px;">Choose City:</label>
+        <select id="city" name="city" #city="ngModel" (change)="selectedState(selectCity)" [(ngModel)]="selectCity">
+          <option></option>
+            <option *ngFor="let c of cities">{{c}}</option>
+        </select>
+        &nbsp; &nbsp;  &nbsp; &nbsp;
+        <label for="cars" style="font-size: 17px;">Choose a branch:</label>
+        <select  id="branch" name="branch" #branch="ngModel" (change)="selectedState(selectedBranch)" [(ngModel)]="selectedBranch">
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="IT">IT</option>
+        </select>
+        <br>
+      </form><br><br>
+
+      <div *ngIf="samples.length !=0">
+       <table  [mfData]="samples" #mf="mfDataTable" [mfRowsOnPage]="3">
+    <table  style="width: 95%;margin-left: 25%;" border="2" align="center">
+        <thead style="font-size: 17px">
+            <tr>
+                <th >
+                        <mfDefaultSorter by="collegeCode"><b>College Code</b></mfDefaultSorter>
+                </th>
+                <th >
+                        <mfDefaultSorter by="collegeName"><b>College Name</b></mfDefaultSorter>
+                    </th>
+                <th >
+                        <mfDefaultSorter by="state"><b>State</b></mfDefaultSorter>
+                    </th>
+                <th >
+                        <mfDefaultSorter by="city"><b>City</b></mfDefaultSorter>
+                   </th>
+                <th >
+                        <mfDefaultSorter by="address"><b>Address</b></mfDefaultSorter>
+                    </th>
+                <th>
+                        <mfDefaultSorter by="contactNumber"><b>Contact Number</b></mfDefaultSorter>
+                   </th>
+                <th ><b>Branch Cutoff %</b></th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr *ngFor="let object of mf.data">
+                <td>{{object.collegeCode}}</td>
+                <td>{{object.collegeName}}</td>
+                <td>{{object.state}}</td>
+                <td>{{object.city}}</td>
+                <td>{{object.address}}</td>
+                <td>{{object.contactNumber}}</td>
+                <td>
+                    <div *ngFor="let recipient of object.branchCutoff | keyvalue">
+                        {{recipient.key}} -- {{recipient.value}}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+     
+    </table>
+    <div style="margin-left: 45%;" align="center">
+       
+            
+                <mfBootstrapPaginator></mfBootstrapPaginator>
+            
+     
+    </div>
+</table>
+</div>
+<div style="height: 400px;" align="center" *ngIf="samples.length ==0">
+    <h4 style="color: red;">No colleges found for the selected filter</h4>
+</div>
+    <br>
+    <app-user-footer></app-user-footer>
+</body>

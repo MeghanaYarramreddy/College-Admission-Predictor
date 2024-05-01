@@ -1,0 +1,46 @@
+<body>
+<app-navbar></app-navbar>
+ <div >
+    <form>
+      <h2 align="center">View Students</h2>
+      <form align="right" style="margin-right: 21%;" class="navbar-form navbar-center" action="/action_page.php">
+        <div>
+          <input  type="text" class="form-control" placeholder=" &#61442; Search" id="search" [(ngModel)]="searchText"
+            name="search">
+
+         
+        </div>
+      </form>
+      <br>
+      <br>
+
+      <table style="font-size: 18px;"   [mfData]="userData" #mf="mfDataTable" [mfRowsOnPage]="5">
+      <table style="width: 60%;" border="2"  cellspacing="2px" cellpadding="2px" align="center" >
+
+        <tr>
+            <th><mfDefaultSorter by="phoneNo"><b>Mobile Number</b></mfDefaultSorter></th>
+            <th><mfDefaultSorter by="name"><b>Name</b></mfDefaultSorter></th>
+            <th><mfDefaultSorter by="email"><b>Email</b></mfDefaultSorter></th>
+            <th><mfDefaultSorter by="gender"><b>Gender</b></mfDefaultSorter></th>
+            <th><mfDefaultSorter by="dob"><b>DOB</b></mfDefaultSorter></th>
+            <th><mfDefaultSorter by="marks"><b>Marks</b></mfDefaultSorter></th>
+            </tr>
+
+        <tr id="userBooking" *ngFor="let c of mf.data | filter:searchText ;let i=index">
+          <td>{{c.phoneNo}}</td>
+          <td>{{c.name}}</td>
+          <td>{{c.email}}</td>
+          <td>{{c.gender}}</td>
+          <td>{{c.dob}}</td>
+          <!-- <td>{{c.hallTicketNumber}}</td> -->
+          <td>{{c.marks}}</td>
+          </tr>
+
+      </table>
+      <div align="center">
+        <mfBootstrapPaginator></mfBootstrapPaginator>
+      </div>
+    </table>
+    </form> 
+  </div>
+  </body>

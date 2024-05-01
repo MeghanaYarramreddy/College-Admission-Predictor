@@ -1,0 +1,46 @@
+ 
+ /* tr:nth-child(even) {background-color: #398B93,5%;}
+ tr:nth-child(odd) {background-color: #f2f2f2;} */
+
+ body{
+    /* background-image: url(src/assets/images/thumb.jpg); */
+    background-image: url(src/assets/images/91.jpg);
+    align-content: center;
+    background-size: cover;
+    background-position: center;
+    
+ }
+ input[type=text], input[type=email], input[type=number] {
+   width: 50%;
+   padding: 10px;
+   /* margin: 5px 22px 0; */
+   /* display: inline-block; */
+   border: none;
+   /* background: #f1f1f1; */
+   align-content: center;
+ }
+ .pagination{
+  color: black;
+
+}
+td{
+  background-color: lightblue;
+  color: black;
+  padding: 8px;
+}
+th{
+  background-color: black;
+  color: white;
+  padding: 12px;
+}
+th, td {
+  text-align: center;
+}
+ select{
+   align-items: center;
+   width: 15%;
+   padding: 10px;
+   display: inline-block;
+   border: none;
+   background: white;
+ }

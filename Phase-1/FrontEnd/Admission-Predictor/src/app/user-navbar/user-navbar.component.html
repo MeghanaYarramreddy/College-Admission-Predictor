@@ -1,0 +1,21 @@
+<div id="navg">
+    <nav class="navbar" class="navbar navbar-dark bg-dark mb-5">
+      <a class="navbar-brand" routerLink="/userHome" href="/#"><i class="fa fa-home"aria-hidden="true"></i> Home</a>
+      <div class="navbar-expand mr-auto">
+        <div class="navbar-nav">
+          <a class="navbar-brand" routerLink="/predictedColleges" href="#"><i class="fa fa-university" aria-hidden="true"></i> Predicted Colleges</a>
+          <a class="navbar-brand" routerLink="/allColleges" href="#"> <i class="fa fa-university" aria-hidden="true"></i> All Colleges</a>
+          <a class="navbar-brand" routerLink="/giveFeedback" href="#"><i class="fas fa-comments"></i> Give Feedback</a>
+              
+        </div>
+      </div>
+      <!-- <a in="logout" class="nav-item nav-link" style="color: red;" (click)="logout()" href="#">Logout</a> -->
+      <div class="dropdown">
+        <button class="dropbtn">User: {{user.name}}</button>
+        <div class="dropdown-content">
+          <a routerLink="/userProfile" href="#">Profile</a>
+          <a (click)="logout()">Logout</a>
+        </div>
+      </div>
+    </nav>
+  </div>

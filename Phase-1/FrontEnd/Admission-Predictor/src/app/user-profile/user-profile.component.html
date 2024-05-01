@@ -1,0 +1,144 @@
+<body>
+    <app-user-navbar></app-user-navbar>
+
+    <table align="center" style="color: bisque">
+        <div>
+            <h4
+                style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;text-align: center;color: red">
+                {{message}}</h4>
+        </div>
+        <div class="form-group">
+            <h2><i class='fas fa-edit' style='font-size:36px'></i> Edit Profile</h2>
+
+            <form #userForm='ngForm'>
+                <tr>
+                    <td>
+
+                        <b style="font-size: large;">Phone Number :</b></td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+                    &nbsp; &nbsp;
+                    <td><input size="30" type="text" class="form-control" name="phoneNo" [(ngModel)]="user.phoneNo"
+                            #phoneNo="ngModel" ngModel readonly></td>
+                </tr><br>
+                <tr>
+                    <td>
+
+                        <b style="font-size: large;">Name :</b></td>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    &nbsp;
+                    <td><input size="30" required type="text" #nameRef='ngModel' pattern="[A-Za-z\s]{3,}"
+                            class="form-control" name="name" [(ngModel)]="user.name" ngModel
+                            placeholder="Please enter name">
+
+                        <div *ngIf="nameRef.invalid && (userForm.submitted || nameRef.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="nameRef.errors.required"> please enter Name </div>
+                            <div *ngIf="nameRef.errors.pattern">Name should be only alphabets with more than 3
+                                characters</div>
+                        </div>
+
+
+                    </td>
+                </tr><br>
+
+                <tr>
+                    <td>
+
+                        <b style="font-size: large;">Email :</b></td>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    &nbsp;
+                    <td><input size="30" type="text" #emailRef='ngModel' class="form-control"
+                            pattern="[a-z][a-z0-9.]+@[a-z]+.(com|net|in)" rows="1" name="email" [(ngModel)]="user.email"
+                            placeholder="Please enter email">
+
+                        <div *ngIf="emailRef.invalid && (userForm.submitted || emailRef.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="emailRef.errors.pattern">mail should be entered correctly</div>
+                        </div>
+
+
+                    </td>
+                </tr><br>
+
+                <tr>
+                    <td>
+
+                        <b style="font-size: large;">Gender :</b></td>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                    <td><input  type="radio" name="gender" value="male" [(ngModel)]="user.gender"> Male
+                        &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<input  type="radio" name="gender" value="female"
+                            [(ngModel)]="user.gender"> Female
+
+
+                    </td>
+                </tr><br>
+                <tr>
+                    <td>
+
+                        <b style="font-size: large;">Date of birth :</b></td>
+                    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <td><input size="30" type="date" #dobRef='ngModel' ngModel min="1950-12-31"
+                            max="2004-12-31" class="form-control" name="dob" placeholder="Enter date of birth"
+                            [(ngModel)]="user.dob">
+
+                       
+
+
+                    </td>
+                </tr><br>
+                <tr>
+                    <td>
+
+                        <b style="font-size: large;">security Question :</b></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                    &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                    <td><input size="30" type="text" class="form-control" name="securityQuestion"
+                            [(ngModel)]="user.securityQuestion" readonly></td>
+                </tr><br>
+
+                <tr>
+                    <td>
+
+                        <b style="font-size: large;">Answer :</b></td>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp; &nbsp;
+                    <td><input size="30" required type="text" #answerRef='ngModel' pattern="[A-Za-z\s]{3,}"
+                            class="form-control" name="answer" [(ngModel)]="user.answer"
+                            placeholder="Please enter answer">
+                        <div *ngIf='answerRef.errors && (answerRef.touched || answerRef.dirty)'
+                            class="alert alert-danger">
+                            <div [hidden]='!answerRef.errors.required'>
+                                please enter Answer
+                            </div>
+                            <div [hidden]='!answerRef.errors.pattern'>
+                                answer should be only alphabets with more than 3 characters
+                            </div>
+                        </div>
+
+                    </td>
+                </tr><br>
+                <tr>
+                    <td>
+
+                        <b style="font-size: large;">Marks %:</b></td>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+                    <td><input size="30"  type="text" #marksRef='ngModel' ngModel 
+                            class="form-control required" name="marks" [(ngModel)]="user.marks" readonly>
+
+
+                    </td>
+                </tr><br>
+
+                <button class="btn btn-primary btn-sm" type="submit" [disabled]='userForm.invalid' class="button_css"
+                    (click)="editUser()">submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </form>
+            <br>
+
+        </div>
+    </table>
+</body>

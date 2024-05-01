@@ -1,0 +1,24 @@
+.btn btn-info{
+    text-align: center;
+}
+body{
+    background-image:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(src\assets\register.jpg);
+    height: 150vh;
+    background-size: cover;
+    background-position: center;
+    
+ }
+ h1{ 
+    color:bisque;
+    
+ }
+
+ 
+ label{
+    color: bisque;
+}
+.style1 {
+
+    width: 40%;
+    
+  }

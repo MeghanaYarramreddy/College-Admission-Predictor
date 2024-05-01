@@ -1,0 +1,113 @@
+<html>
+
+<body>
+    <!-- <app-homenav></app-homenav> -->
+    <app-home-nav></app-home-nav>
+
+
+       <div style="margin-left: 30%;">
+               <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register</h1>
+               <form #userForm='ngForm' (ngSubmit)="onSubmit(userForm.value)">
+                <div class="container">
+                <div class="form-group style1">
+                    <label for="name">Name</label>
+                    <input required type="text" #nameRef='ngModel' pattern="[A-Za-z\s]{3,}" class="form-control"
+                         name="name" placeholder="Enter Name" ngModel>
+                    <div *ngIf='nameRef.errors && (nameRef.touched || nameRef.dirty)' class="alert alert-danger">
+                        <div [hidden]='!nameRef.errors.required'>
+                            please enter Name
+                        </div>
+                        <div [hidden]='!nameRef.errors.pattern'>
+                            Name should be only alphabets with more than 3 characters
+                        </div>
+                    </div>
+                </div> 
+              <div class="form-group style1">
+            
+                    
+                <label for="model">Phone Number</label>
+                    <input required type="text" #phoneRef='ngModel' ngModel pattern="[1-9][0-9]{9}" class="form-control"
+                        name="mobile" placeholder="Enter Valid Mobile Number" ngModel >
+                    <div *ngIf='phoneRef.errors && (phoneRef.touched || phoneRef.dirty)' class="alert alert-danger">
+                        <div [hidden]='!phoneRef.errors.required'>
+                            please enter your phone number
+                        </div>
+                        <div [hidden]='!phoneRef.errors.pattern'>
+                            phone no should be of 10 digits
+                        </div>
+                    </div>
+                </div>
+
+              
+
+                <div class="form-group style1">
+                    <label for="question">Security Question</label>
+                    <select required class="form-control" #questionRef='ngModel' name="securityquestion" ngModel>
+                        
+                    
+                       <option value="" disabled selected hidden>Select a question</option>
+                        <option>What is your favourite dish  </option>
+                        <option>What is your favourite location </option>
+                    </select>
+                    <div *ngIf='questionRef.errors && (questionRef.touched || questionRef.dirty)' class="alert alert-danger">
+                    <div [hidden]='!questionRef.errors.required'>please select question</div></div>
+                </div>
+
+<div class="form-group style1">
+    <label for="answer">Answer</label>
+                    <input required type="text" #answerRef='ngModel' pattern="[A-Za-z\s]{3,}" class="form-control"
+                         name="answer" placeholder="Enter Answer" ngModel >
+                    <div *ngIf='answerRef.errors && (answerRef.touched || answerRef.dirty)' class="alert alert-danger">
+                        <div [hidden]='!answerRef.errors.required'>
+                            please enter Answer
+                        </div>
+                        <div [hidden]='!answerRef.errors.pattern'>
+                            answer should be only alphabets with more than 3 characters
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="form-group style1">
+                    <label for="password">Password</label>
+                    <input required type="password" #passwordRef='ngModel' class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="pwd"
+                        placeholder="Enter password" ngModel>
+                        <div *ngIf='passwordRef.errors && (passwordRef.touched || passwordRef.dirty)' class="alert alert-danger">
+                            <div [hidden]='!passwordRef.errors.required'>
+                                please enter Password
+                            </div>
+                            <div *ngIf="passwordRef.errors.pattern"> Must contain at least one number and one uppercase
+                                and
+                                lowercase letter, and at least 8 or more characters.</div>
+                        </div>
+                </div>
+                
+                <div class="form-group style1">
+                <label for="marks">Marks %</label>
+                    <input required type="number" #marksRef='ngModel' ngModel pattern="^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$" class="form-control required"
+                        name="marks"  placeholder="Enter Marks" ngModel>
+                    <div *ngIf='marksRef.errors && (marksRef.touched || marksRef.dirty)' class="alert alert-danger">
+                        <div [hidden]='!marksRef.errors.required'>
+                            please enter your Marks
+                        </div>
+                        <div *ngIf="marksRef.errors.pattern">
+                             Please enter Marks percentage 
+                        </div>
+                    </div>
+                </div>
+                
+
+            
+                
+           
+              
+                   
+                    <button class="btn btn-info" id="button" type="submit" value="Submit" [disabled]='userForm.invalid'>Register</button>
+                        
+                        <div ><h3 style="color: rgb(226, 94, 94);">{{message}}</h3></div> 
+                        </div>
+                     </form>
+                    </div>
+
+</body>
+
+</html>

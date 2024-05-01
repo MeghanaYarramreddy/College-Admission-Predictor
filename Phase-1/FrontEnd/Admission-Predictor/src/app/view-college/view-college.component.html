@@ -1,0 +1,137 @@
+<body>
+  <app-navbar></app-navbar>
+
+  <table style="width: 100%; height: auto" align="center" [mfData]="CollegesList" #mf="mfDataTable" [mfRowsOnPage]="8">
+    <div style="text-align:center; color: azure">
+      <h3>
+        <b> {{ title }}</b>
+      </h3>
+      <br>
+      <form style="margin-left: 3%">
+
+        <label for="cars" style="color: antiquewhite">Choose State :</label>&nbsp; &nbsp;
+        <select id="state" name="state" #state="ngModel" style="opacity: 60%;color: black;"
+          (change)="selectedState(selectState)" [(ngModel)]="selectState">
+          <option></option>
+          <option *ngFor="let s of states">{{s}}</option>
+        </select>
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        <label for="cars" style="color: antiquewhite">Choose City :</label>&nbsp; &nbsp;
+        <select id="city" name="city" #city="ngModel" style="opacity: 60%;color: black;"
+          (change)="selectedState(selectCity)" [(ngModel)]="selectCity">
+          <option></option>
+          <option *ngFor="let c of cities">{{c}}</option>
+        </select>
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        <label for="cars" style="color: antiquewhite">Choose a branch :</label>&nbsp; &nbsp;
+        <select id="branch" name="branch" #branch="ngModel" style="opacity: 60%;color: black;"
+          (change)="selectedState(selectedBranch)" [(ngModel)]="selectedBranch">
+          <option value="CIVIL">CIVIL</option>
+          <option value="MECH">MECH</option>
+          <option value="CSE">CSE</option>
+          <option value="ECE">ECE</option>
+          <option value="EEE">EEE</option>
+          <option value="IT">IT</option>
+        </select>
+        <br>
+      </form><br><br>
+    </div>
+    <div style="margin-left: 10px;" class="input-group">
+      <h4><b style="color: azure">Search :&nbsp;</b></h4>
+      <input placeholder="Search" class="form-control-input" style="text-align:right; opacity: 60%" align="center"
+        type="text" [(ngModel)]="search">
+
+      <ul class="item_sorting">
+        <li>
+          <!-- Sort Panel -->
+          <span id="sort" class="sorting_text" style="color: black"><b>Sort by</b></span>
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          <ul>
+            <li class="product_sorting_btn" (click)="nameSort()"><span>College Name</span></li>
+            <li class="product_sorting_btn" (click)="idSort()"><span>College Code</span>
+            </li>
+            <li class="product_sorting_btn" (click)="addressSort()"><span>Address </span>
+            <li class="product_sorting_btn" (click)="citySort()"><span>City </span>
+            <li class="product_sorting_btn" (click)="locationSort()"><span>State </span>
+
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+    <br>
+    <div *ngIf="CollegesList.length != 0">
+      <table style="font-size: 18px" width=95%; align="center" border="0.5">
+        <tr class="row">
+          <td class="column" *ngFor="let clg of  mf.data | filter:search,let i =index">
+
+            <igx-card style="background-color: #fdefe9">
+              <div>
+                <igx-card-header>
+
+                  <h3 igxCardHeaderTitle>College Code : {{clg.collegeCode}}</h3>
+                  <h3 igxCardHeaderTitle>College Name : {{clg.collegeName}}</h3>
+
+                  <p igxCardHeaderSubtitle>Address : {{clg.address}} </p>
+                  <h5 igxCardHeaderSubtitle>City : {{clg.city}}</h5>
+                  <h5 igxCardHeaderSubtitle>State : {{clg.state}}</h5>
+                  <p igxCardHeaderSubtitle>Contact No : {{clg.contactNumber}}</p>
+
+                </igx-card-header>
+                <details>
+                  <summary>
+                    <p igxCardHeaderTitle>Departments - Cutoff %</p>
+                  </summary>
+                  <igx-card-content>
+
+                    <!-- <hr width="100%">
+            <igx-card-header>
+              <p  igxCardHeaderTitle>Departments - Cutoff</p> <hr>
+            </igx-card-header> -->
+
+                    <div class="table table-striped" *ngFor="let d of clg.branchCutoff | keyvalue">
+                      {{d.key}}&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{d.value}}% <br>
+                    </div>
+                  </igx-card-content>
+                </details>
+
+                <button igxButton="icon" style="text-align: center;" class="btn btn-info" igxRipple
+                  (click)="updateCollege(clg)" igxRippleCentered="true">
+                  Update
+                </button>&nbsp;&nbsp;&nbsp;
+                <!-- <button igxButton="icon" class="btn btn-danger" igxRipple (click)="deleteCollege(clg,i)"
+                  igxRippleCentered="true">
+                  Delete
+                </button> -->
+
+                <button igxButton="icon" class="btn btn-danger" igxRipple mwlConfirmationPopover
+                  [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="top"
+                  (confirm)="deleteCollege(clg,i)" (cancel)="cancelClicked=true" igxRippleCentered="true">
+                  Delete
+                </button>
+
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </igx-card>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+
+        </tr>
+
+        <mfBootstrapPaginator></mfBootstrapPaginator>
+
+      </table>
+    </div>
+    <div align="center" style="margin-left: 37.5%;width: 25%;" *ngIf="CollegesList.length == 0">
+
+      <igx-card>
+        <igx-card-header>
+
+          <h3 style="color: red;" igxCardHeaderTitle>No colleges found for the filters applied</h3>
+          <igx-card-content></igx-card-content>
+        </igx-card-header>
+
+      </igx-card>
+
+    </div>
